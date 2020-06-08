@@ -1,0 +1,19 @@
+#wp-link-wrap.enhanced_link {
+  height: 80vh;
+  min-height: 500px;
+
+  margin-top: 0;
+
+  transform: translate(0, -50%);
+}
+
+#wp-link-wrap.enhanced_link #wp-link .query-results {
+  top: 250px;
+}
+
+@media screen and (max-width: 782px) {
+
+  #wp-link-wrap.enhanced_link #wp-link .query-results {
+    top: 300px;
+  }
+}
