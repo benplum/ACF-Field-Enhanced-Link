@@ -1,94 +1,57 @@
 <?php
-
 /*
 Plugin Name: Advanced Custom Fields: Enhanced Link Field
-Plugin URI: PLUGIN_URL
-Description: SHORT_DESCRIPTION
+Plugin URI: https://github.com/benplum/ACF-Field-Enhanced-Link
+Description: Enhanced link field
 Version: 1.0.0
-Author: AUTHOR_NAME
-Author URI: AUTHOR_URL
+Author: Ben Plum
+Author URI: https://benplum.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-// exit if accessed directly
-if( ! defined( 'ABSPATH' ) ) exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
 
+class ACF_Plugin_Enhanced_Link_Field {
 
-// check if class already exists
-if( !class_exists('pw_acf_plugin_enhanced_link') ) :
+  protected static $instance;
 
-class pw_acf_plugin_enhanced_link {
+  public $file = __FILE__;
 
-	// vars
-	var $settings;
+  var $settings;
 
+  public static function get_instance() {
+    if ( empty( self::$instance ) && ! ( self::$instance instanceof ACF_Plugin_Enhanced_Link_Field ) ) {
+      self::$instance = new ACF_Plugin_Enhanced_Link_Field();
+    }
 
-	/*
-	*  __construct
-	*
-	*  This function will setup the class functionality
-	*
-	*  @type	function
-	*  @date	17/02/2016
-	*  @since	1.0.0
-	*
-	*  @param	void
-	*  @return	void
-	*/
+    return self::$instance;
+  }
 
-	function __construct() {
+  function __construct() {
+    $this->settings = array(
+      'version' => '1.0.0',
+      'url' => plugin_dir_url( __FILE__ ),
+      'path' => plugin_dir_path( __FILE__ )
+    );
 
-		// settings
-		// - these will be passed into the field class.
-		$this->settings = array(
-			'version'	=> '1.0.0',
-			'url'		=> plugin_dir_url( __FILE__ ),
-			'path'		=> plugin_dir_path( __FILE__ )
-		);
+    // add_action( 'acf/register_fields', array( $this, 'include_field' ) ); // v4
+    add_action( 'acf/include_field_types', array( $this, 'include_field' ) ); // v5
+  }
 
+  function include_field( $version = false ) {
+    if ( ! $version ) $version = 5; // 4;
 
-		// include field
-		add_action('acf/include_field_types', 	array($this, 'include_field')); // v5
-		// add_action('acf/register_fields', 		array($this, 'include_field')); // v4
-	}
+    // load_plugin_textdomain( 'pwacf', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' );
 
-
-	/*
-	*  include_field
-	*
-	*  This function will include the field type class
-	*
-	*  @type	function
-	*  @date	17/02/2016
-	*  @since	1.0.0
-	*
-	*  @param	$version (int) major ACF version. Defaults to false
-	*  @return	void
-	*/
-
-	function include_field( $version = false ) {
-
-		// support empty $version
-		if( !$version ) $version = 5; // 4;
-
-
-		// load textdomain
-		load_plugin_textdomain( 'pwacf', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' );
-
-
-		// include
-		include_once('fields/class-pw-acf-field-enhanced-link-v' . $version . '.php');
-	}
+    include_once 'fields/class-pw-acf-field-enhanced-link-v' . $version . '.php';
+  }
 
 }
 
+ACF_Plugin_Enhanced_Link_Field::get_instance();
 
-// initialize
-new pw_acf_plugin_enhanced_link();
-
-
-// class_exists check
-endif;
-
-?>
+include 'includes/updater.php';
