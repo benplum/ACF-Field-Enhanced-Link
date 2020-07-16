@@ -2,8 +2,8 @@
 /*
 Plugin Name: Advanced Custom Fields: Enhanced Link Field
 Plugin URI: https://github.com/benplum/ACF-Field-Enhanced-Link
-Description: Enhanced link field
-Version: 1.0.2
+Description: An enhanced link field for Advanced Custom Fields Pro.
+Version: 1.0.3
 Author: Ben Plum
 Author URI: https://benplum.com
 License: GPLv2 or later
