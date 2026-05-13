@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields: Enhanced Link Field
 Plugin URI: https://github.com/benplum/ACF-Field-Enhanced-Link
 Description: An enhanced link field for Advanced Custom Fields Pro.
-Version: 1.0.4
+Version: 1.0.5
 Author: Ben Plum
 Author URI: https://benplum.com
 License: GPLv2 or later
@@ -33,7 +33,7 @@ class ACF_Plugin_Enhanced_Link_Field {
 
   function __construct() {
     $this->settings = array(
-      'version' => '1.0.0',
+      'version' => '1.0.5',
       'url' => plugin_dir_url( __FILE__ ),
       'path' => plugin_dir_path( __FILE__ )
     );

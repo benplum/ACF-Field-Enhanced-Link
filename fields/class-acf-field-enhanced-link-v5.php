@@ -7,6 +7,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class acf_field_enhanced_link extends acf_field_link {
 
+	var $settings;
+
 	function initialize() {
 		$this->name = 'enhanced_link';
 		$this->label = __("Enhanced Link",'acf');
